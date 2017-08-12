@@ -31,10 +31,19 @@ dependencies {
 
     compile "com.android.support:appcompat-v7:$libraries.supportLibraryVersion"
     compile "com.android.support:recyclerview-v7:$libraries.supportLibraryVersion"
+    compile "com.android.support:cardview-v7:$libraries.supportLibraryVersion"
     compile "com.android.support:design:$libraries.supportLibraryVersion"
 
     compile "com.google.dagger:dagger-android:$libraries.daggerVersion"
     annotationProcessor "com.google.dagger:dagger-compiler:$libraries.daggerVersion"
+
+    compile "com.jakewharton:butterknife:$libraries.butterKnifeVersion"
+    annotationProcessor "com.jakewharton:butterknife-compiler:$libraries.butterKnifeVersion"
+
+    annotationProcessor "com.google.auto.value:auto-value:$libraries.autoValueVersion"
+    provided "com.jakewharton.auto.value:auto-value-annotations:$libraries.autoValueVersion"
+    annotationProcessor "com.ryanharter.auto.value:auto-value-gson:$libraries.autoValueGsonVersion"
+    provided "com.ryanharter.auto.value:auto-value-gson:$libraries.autoValueGsonVersion"
 
     compile "com.squareup.retrofit2:retrofit:$libraries.retrofitVersion"
     compile "com.squareup.retrofit2:adapter-rxjava2:$libraries.retrofitVersion"

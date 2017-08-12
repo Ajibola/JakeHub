@@ -13,6 +13,10 @@ ext.libraries = [
         glideVersion                   : "4.0.0-RC0",
         rxAndroidVersion               : "2.0.1",
         okHttpLoggingInterceptorVersion: "3.8.0",
+        butterknifeVersion             : "8.0.1",
+        autoValueVersion               : "1.4",
+        autoValueGsonVersion           : "0.5.0",
+        butterKnifeVersion             : "8.7.0",
 
         jUnitVersion                   : "4.12",
         mockWebserverVersion           : "3.8.0",

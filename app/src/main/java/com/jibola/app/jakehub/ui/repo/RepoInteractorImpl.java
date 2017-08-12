@@ -9,8 +9,6 @@ import java.util.List;
 import javax.inject.Inject;
 
 import io.reactivex.Observable;
-import io.reactivex.functions.Consumer;
-import io.reactivex.functions.Function;
 
 /**
  * Created by hp on 8/11/2017.
@@ -19,6 +17,8 @@ import io.reactivex.functions.Function;
 public class RepoInteractorImpl implements RepoContract.Interactor {
 
     private final String USER_NAME = "JakeWharton";
+    private final int LIMIT = 15;
+
     private ApiDataSource apiDataSource;
     private LocalDataSource localDataSource;
 
@@ -29,15 +29,13 @@ public class RepoInteractorImpl implements RepoContract.Interactor {
     }
 
     @Override
-    public Observable<List<Repo>> loadRepositories(final int page, final int per_page) {
-        return apiDataSource.getRepos(USER_NAME, page + 1, per_page)
-                .onErrorReturn(new Function<Throwable, List<Repo>>() {
-                    @Override
-                    public List<Repo> apply(Throwable throwable) throws Exception {
-                        List<Repo> localData = localDataSource.getRepos(USER_NAME, page, per_page).blockingFirst();
-                        return localData;
-                    }
-                });
+    public Observable<List<Repo>> loadRepositories(final int page) {
+        return apiDataSource.getRepos(USER_NAME, page + 1, LIMIT);
+    }
+
+    @Override
+    public Observable<List<Repo>> loadCachedRepositories(int page) {
+        return localDataSource.getRepos(USER_NAME, page, LIMIT);
     }
 
 }

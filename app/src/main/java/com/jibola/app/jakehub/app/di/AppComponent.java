@@ -1,4 +1,4 @@
-package com.jibola.app.jakehub.di;
+package com.jibola.app.jakehub.app.di;
 
 import com.jibola.app.jakehub.data.di.ApiModule;
 import com.jibola.app.jakehub.ui.repo.MainActivity;

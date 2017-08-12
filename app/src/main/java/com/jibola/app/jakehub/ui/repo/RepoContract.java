@@ -18,7 +18,7 @@ public interface RepoContract {
 
         void hideLoading();
 
-        void showMessage(String message);
+        void showMessage(Throwable throwable);
 
         void displayRepositories(List<Repo> repo, boolean refresh);
     }
@@ -34,6 +34,8 @@ public interface RepoContract {
 
     interface Interactor {
 
-        Observable<List<Repo>> loadRepositories(int page, int per_page);
+        Observable<List<Repo>> loadRepositories(int page);
+
+        Observable<List<Repo>> loadCachedRepositories(int page);
     }
 }

@@ -11,6 +11,7 @@ import com.jibola.app.jakehub.R;
 import com.jibola.app.jakehub.app.JakeApplication;
 import com.jibola.app.jakehub.domain.model.Repo;
 import com.jibola.app.jakehub.ui.util.EndlessScrollListener;
+import com.jibola.app.jakehub.ui.util.ErrorMapper;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -36,6 +37,8 @@ public class MainActivity extends AppCompatActivity implements RepoContract.View
     @Inject
     RepoContract.Presenter repoPresenter;
 
+    @Inject ErrorMapper errorMapper;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,7 +48,7 @@ public class MainActivity extends AppCompatActivity implements RepoContract.View
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         repoRecyclerView.setLayoutManager(layoutManager);
-        EndlessScrollListener endlessScrollListener = new EndlessScrollListener(layoutManager, 3) {
+        endlessScrollListener = new EndlessScrollListener(layoutManager, 3) {
             @Override
             public void addFooterViewItem() {
                 if ((repoRecyclerView.getAdapter()).getItemCount() > 0) {
@@ -55,6 +58,7 @@ public class MainActivity extends AppCompatActivity implements RepoContract.View
 
             @Override
             public void onLoadMore(int page, int totalItemsCount) {
+                setLoading(true);
                 repoPresenter.loadMoreRepositories(page, false);
             }
         };
@@ -106,8 +110,8 @@ public class MainActivity extends AppCompatActivity implements RepoContract.View
     }
 
     @Override
-    public void showMessage(String message) {
-        Snackbar.make(repoRecyclerView, message, Snackbar.LENGTH_LONG).show();
+    public void showMessage(Throwable throwable) {
+        Snackbar.make(repoRecyclerView, errorMapper.getErrorString(throwable), Snackbar.LENGTH_LONG).show();
     }
 
     @Override
@@ -121,9 +125,9 @@ public class MainActivity extends AppCompatActivity implements RepoContract.View
             adapter = (RepoAdapter) repoRecyclerView.getAdapter();
         }
 
-        if (endlessScrollListener != null) {
-            endlessScrollListener.onLoaded();
-
+        if (adapter.getItemCount() > 0 && adapter.getItemViewType(adapter.getItemCount()-1) == RepoAdapter
+                .FOOTER_VIEW_TYPE) {
+            adapter.removeItem(adapter.getItemCount()-1);
         }
 
         if (refresh) {
@@ -131,5 +135,7 @@ public class MainActivity extends AppCompatActivity implements RepoContract.View
         } else {
             adapter.updateList(repo);
         }
+
+        endlessScrollListener.setLoading(false);
     }
 }

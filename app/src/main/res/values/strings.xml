@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">JakeHub</string>
+
+    <string name="error_http">Unable to fetch repos. Load from cache</string>
+    <string name="error_default">Ooops couldn\'t fetch repos</string>
 </resources>

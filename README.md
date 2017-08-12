@@ -59,7 +59,10 @@ The app can also work offline, if results have previously been cached.
  to ensure that the code always follows the guide.
  
  ## Possible Improvements
+<<<<<<< HEAD
  * 
+=======
+>>>>>>> 17131647a9bf99aad4d3aacf2d214e3c11f92d3e
  * Continuous Integration - to continuously and automatically run the tests and other tasks as we introduce new code to the repository
  * More and more tests (especially UI tests)
  

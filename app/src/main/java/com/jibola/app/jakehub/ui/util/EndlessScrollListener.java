@@ -4,17 +4,17 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 /**
- * Adapted EndlessRecyclerView class from CodePath :
- *
+ * Adapted EndlessRecyclerView class
  */
 public abstract class EndlessScrollListener extends RecyclerView.OnScrollListener {
+
     private int visibleThreshold = 0;
     private int currentPage = 0;
     private int previousTotalItemCount = 0;
     private int startingPageIndex = 0;
 
     private int currentScrollState;
-    private boolean loading = true;
+    private volatile boolean loading = true;
     RecyclerView.LayoutManager mLayoutManager;
 
     public EndlessScrollListener(LinearLayoutManager layoutManager, int threshold) {
@@ -49,13 +49,15 @@ public abstract class EndlessScrollListener extends RecyclerView.OnScrollListene
         }
 
         if (loading && (totalItemCount > previousTotalItemCount)) {
+            loading = false;
             previousTotalItemCount = totalItemCount;
         }
 
-        if ((lastVisibleItemPosition + visibleThreshold) >= totalItemCount) {
+        if (!loading && (lastVisibleItemPosition + visibleThreshold) >= totalItemCount) {
             currentPage++;
             addFooterViewItem();
             onLoadMore(currentPage, totalItemCount);
+            previousTotalItemCount = totalItemCount+1;
         }
     }
 
@@ -63,8 +65,8 @@ public abstract class EndlessScrollListener extends RecyclerView.OnScrollListene
 
     public abstract void onLoadMore(int page, int totalItemsCount);
 
-    public void onLoaded() {
-        loading = false;
-    };
+    public void setLoading(boolean loading) {
+        this.loading = loading;
+    }
 
 }

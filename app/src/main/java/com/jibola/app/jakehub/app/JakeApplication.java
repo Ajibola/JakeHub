@@ -2,9 +2,9 @@ package com.jibola.app.jakehub.app;
 
 import android.app.Application;
 
-import com.jibola.app.jakehub.di.AppComponent;
-import com.jibola.app.jakehub.di.AppModule;
-import com.jibola.app.jakehub.di.DaggerAppComponent;
+import com.jibola.app.jakehub.app.di.AppComponent;
+import com.jibola.app.jakehub.app.di.AppModule;
+import com.jibola.app.jakehub.app.di.DaggerAppComponent;
 
 import io.realm.Realm;
 

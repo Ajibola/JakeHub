@@ -1,8 +1,11 @@
-package com.jibola.app.jakehub.di;
+package com.jibola.app.jakehub.app.di;
 
 import android.app.Application;
 import android.content.Context;
 import android.content.res.Resources;
+
+import com.jibola.app.jakehub.app.AppScheduler;
+import com.jibola.app.jakehub.app.SchedulerProvider;
 
 import javax.inject.Singleton;
 
@@ -16,7 +19,7 @@ import dagger.Provides;
 @Module
 public class AppModule {
 
-    private Application  app;
+    private Application app;
 
     public AppModule(Application app) {
         this.app = app;
@@ -32,5 +35,11 @@ public class AppModule {
     @Singleton
     Resources provideAppResources() {
         return app.getResources();
+    }
+
+    @Provides
+    @Singleton
+    SchedulerProvider provideAppScheduler() {
+        return new AppScheduler();
     }
 }

@@ -11,9 +11,6 @@ import io.reactivex.schedulers.Schedulers;
  */
 
 public class AppScheduler implements SchedulerProvider  {
-    @Inject
-    public AppScheduler() {
-    }
 
     @Override
     public Scheduler mainThread() {

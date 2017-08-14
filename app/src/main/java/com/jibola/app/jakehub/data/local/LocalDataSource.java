@@ -5,6 +5,7 @@ import com.jibola.app.jakehub.data.local.mapper.RepoRealmMapper;
 import com.jibola.app.jakehub.domain.DataSource;
 import com.jibola.app.jakehub.domain.model.Repo;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -31,9 +32,12 @@ public class LocalDataSource implements DataSource {
         Realm realm = Realm.getDefaultInstance();
         RealmResults<GitRepoRealm> gitRepoRealms = realm.where(GitRepoRealm.class).findAll();
 
-        skipEnd = (skipEnd > gitRepoRealms.size()) ? gitRepoRealms.size() : skipEnd;
-        List<Repo> repoList = (List<Repo>) new RepoRealmMapper().mapObjectCollection(gitRepoRealms.subList(skipCount,
-                skipEnd));
+        List<Repo> repoList = new ArrayList<>();
+        skipEnd = (skipEnd > gitRepoRealms.size() - 1) ? gitRepoRealms.size() - 1 : skipEnd;
+        if (skipCount < gitRepoRealms.size()) {
+            repoList = (List<Repo>) new RepoRealmMapper().mapObjectCollection(
+                    gitRepoRealms.subList(skipCount, skipEnd));
+        }
 
         return Observable.just(repoList);
     }

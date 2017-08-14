@@ -14,7 +14,8 @@ public abstract class EndlessScrollListener extends RecyclerView.OnScrollListene
     private int startingPageIndex = 0;
 
     private int currentScrollState;
-    private volatile boolean loading = true;
+    private boolean loading = true;
+    private boolean stopReload = false;
     RecyclerView.LayoutManager mLayoutManager;
 
     public EndlessScrollListener(LinearLayoutManager layoutManager, int threshold) {
@@ -53,7 +54,7 @@ public abstract class EndlessScrollListener extends RecyclerView.OnScrollListene
             previousTotalItemCount = totalItemCount;
         }
 
-        if (!loading && (lastVisibleItemPosition + visibleThreshold) >= totalItemCount) {
+        if (!loading && !stopReload && (lastVisibleItemPosition + visibleThreshold) >= totalItemCount) {
             currentPage++;
             addFooterViewItem();
             onLoadMore(currentPage, totalItemCount);
@@ -67,6 +68,11 @@ public abstract class EndlessScrollListener extends RecyclerView.OnScrollListene
 
     public void setLoading(boolean loading) {
         this.loading = loading;
+
+        int totalItemCount = mLayoutManager.getItemCount();
+        if(!loading && previousTotalItemCount > 0 && previousTotalItemCount == totalItemCount) {
+            stopReload = true;
+        }
     }
 
 }

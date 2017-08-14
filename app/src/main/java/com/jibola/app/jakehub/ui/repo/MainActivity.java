@@ -111,7 +111,7 @@ public class MainActivity extends AppCompatActivity implements RepoContract.View
 
     @Override
     public void showMessage(Throwable throwable) {
-        Snackbar.make(repoRecyclerView, errorMapper.getErrorString(throwable), Snackbar.LENGTH_LONG).show();
+        Snackbar.make(repoRecyclerView, errorMapper.getErrorString(throwable), Snackbar.LENGTH_SHORT).show();
     }
 
     @Override

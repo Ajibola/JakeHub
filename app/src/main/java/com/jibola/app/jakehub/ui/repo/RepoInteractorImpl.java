@@ -2,6 +2,7 @@ package com.jibola.app.jakehub.ui.repo;
 
 import com.jibola.app.jakehub.data.local.LocalDataSource;
 import com.jibola.app.jakehub.data.network.ApiDataSource;
+import com.jibola.app.jakehub.domain.DataSource;
 import com.jibola.app.jakehub.domain.model.Repo;
 
 import java.util.List;
@@ -19,8 +20,8 @@ public class RepoInteractorImpl implements RepoContract.Interactor {
     private final String USER_NAME = "JakeWharton";
     private final int LIMIT = 15;
 
-    private ApiDataSource apiDataSource;
-    private LocalDataSource localDataSource;
+    private DataSource apiDataSource;
+    private DataSource localDataSource;
 
     @Inject
     public RepoInteractorImpl(ApiDataSource apiDataSource, LocalDataSource localDataSource) {

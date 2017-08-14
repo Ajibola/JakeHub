@@ -1,6 +1,5 @@
 package com.jibola.app.jakehub.ui.repo;
 
-import com.jibola.app.jakehub.app.AppScheduler;
 import com.jibola.app.jakehub.app.SchedulerProvider;
 import com.jibola.app.jakehub.domain.model.Repo;
 
@@ -17,16 +16,14 @@ import io.reactivex.functions.Function;
 
 public class RepoPresenterImpl implements RepoContract.Presenter {
 
-    @Inject
     RepoContract.Interactor interactor;
-
-    @Inject
     SchedulerProvider appScheduler;
-
     private RepoContract.View view;
 
     @Inject
-    public RepoPresenterImpl() {
+    public RepoPresenterImpl(RepoContract.Interactor interactor, SchedulerProvider appScheduler) {
+        this.interactor = interactor;
+        this.appScheduler = appScheduler;
     }
 
     @Override

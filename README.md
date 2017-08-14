@@ -15,6 +15,7 @@ The app can also work offline, if results have previously been cached.
  * RxJava/RxAndroid - for reactive programming
  * JUnit - for testing
  * Mockito - for mocking & stubbing objects
+ * Espresso - for instrumentation tests
  * Realm for data persistence
  * Checkstyle - for static code analysis
  * Google AppCompat Support Libraries
@@ -38,33 +39,17 @@ The app can also work offline, if results have previously been cached.
  
  Each layer has its own data objects that are mapped to each other with data mappers.
  
- ### Model Layer
- 
- 
- ## View Layer
- 
- 
- ## Presenter Layer
- 
-   
- ## Offline Functionality
  The API results are cached using Realm as the data store.
-
  
  ## Testing
- This projects has local unit tests powered by JUnit and mockito for mocking objects.
+ This projects has local unit tests powered by JUnit and mockito for mocking objects. Instrumentation tests are run 
+ by Espresso.
  
  ## Code Quality
  This project uses Checkstyle for static code analysis - it uses the Google Java Style guideline rules
  to ensure that the code always follows the guide.
  
  ## Possible Improvements
-<<<<<<< HEAD
- * 
-=======
->>>>>>> 17131647a9bf99aad4d3aacf2d214e3c11f92d3e
  * Continuous Integration - to continuously and automatically run the tests and other tasks as we introduce new code to the repository
  * More and more tests (especially UI tests)
  
- ## Additional Notes
- * 
